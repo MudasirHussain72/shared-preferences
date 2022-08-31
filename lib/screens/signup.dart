@@ -1,4 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_pref/screens/login.dart';
+import 'package:shared_pref/screens/student.dart';
+import 'package:shared_pref/screens/teacher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -18,6 +22,7 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: const Text("SignUp Screen"),
         backgroundColor: Colors.deepPurple,
@@ -141,10 +146,23 @@ class _SignupScreenState extends State<SignupScreen> {
             InkWell(
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
-                prefs.setString("userName", userNameController.text.trim());
-                prefs.setString("email", emailController.text.trim());
-                prefs.setString("userType", dropdownValue);
-
+                await prefs.setString(
+                    "userName", userNameController.text.trim());
+                await prefs.setString("email", emailController.text.trim());
+                await prefs.setString("userType", dropdownValue);
+                await prefs.setBool("isLogin", true);
+                var userType = prefs.getString("userType");
+                if (await userType == 'Student') {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const StudentScreen()));
+                } else if (await userType == 'Teacher') {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TeacherScreen()));
+                }
               },
               child: Container(
                 width: double.infinity,
@@ -159,6 +177,25 @@ class _SignupScreenState extends State<SignupScreen> {
                 )),
               ),
             ),
+            const SizedBox(
+              height: 30,
+            ),
+            RichText(
+                text: TextSpan(
+                    style: const TextStyle(color: Colors.black),
+                    children: [
+                  const TextSpan(text: 'I already have an account '),
+                  TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()));
+                        },
+                      text: 'Login',
+                      style: const TextStyle(color: Colors.deepPurple))
+                ])),
           ],
         ),
       ),
