@@ -3,6 +3,8 @@ import 'package:shared_pref/screens/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TeacherScreen extends StatefulWidget {
+  static const String id = 'teacher_screen';
+
   const TeacherScreen({Key? key}) : super(key: key);
 
   @override
@@ -43,8 +45,7 @@ class _TeacherScreenState extends State<TeacherScreen> {
             onTap: () async {
               final prefs = await SharedPreferences.getInstance();
               await prefs.clear();
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()));
+              Navigator.pushNamed(context, LoginScreen.id, arguments: "");
             },
             child: Icon(
               Icons.logout_outlined,

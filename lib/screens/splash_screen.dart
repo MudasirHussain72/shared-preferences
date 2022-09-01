@@ -6,6 +6,7 @@ import 'package:shared_pref/screens/teacher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const String id = 'splash_screen';
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
@@ -25,19 +26,18 @@ class _SplashScreenState extends State<SplashScreen> {
     if (isLogin) {
       if (userType == "Student") {
         Timer(const Duration(seconds: 2), () {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const StudentScreen()));
+          Navigator.pushReplacementNamed(context, StudentScreen.id,
+              arguments: "");
         });
       } else if (userType == "Teacher") {
         Timer(const Duration(seconds: 2), () {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const TeacherScreen()));
+          Navigator.pushReplacementNamed(context, TeacherScreen.id,
+              arguments: "");
         });
       }
     } else {
       Timer(const Duration(seconds: 2), () {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const LoginScreen()));
+        Navigator.pushReplacementNamed(context, LoginScreen.id, arguments: "");
       });
     }
   }

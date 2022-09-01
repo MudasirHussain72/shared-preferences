@@ -6,6 +6,8 @@ import 'package:shared_pref/screens/teacher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignupScreen extends StatefulWidget {
+  static const String id = 'signup_screen';
+
   const SignupScreen({Key? key}) : super(key: key);
 
   @override
@@ -153,15 +155,11 @@ class _SignupScreenState extends State<SignupScreen> {
                 await prefs.setBool("isLogin", true);
                 var userType = prefs.getString("userType");
                 if (await userType == 'Student') {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const StudentScreen()));
+                  Navigator.pushReplacementNamed(context, StudentScreen.id,
+                      arguments: "");
                 } else if (await userType == 'Teacher') {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const TeacherScreen()));
+                  Navigator.pushReplacementNamed(context, TeacherScreen.id,
+                      arguments: "");
                 }
               },
               child: Container(
@@ -188,10 +186,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   TextSpan(
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LoginScreen()));
+                          Navigator.pushNamed(context, LoginScreen.id,
+                              arguments: "");
                         },
                       text: 'Login',
                       style: const TextStyle(color: Colors.deepPurple))

@@ -1,12 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_pref/screens/home_screen.dart';
 import 'package:shared_pref/screens/signup.dart';
 import 'package:shared_pref/screens/student.dart';
 import 'package:shared_pref/screens/teacher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const String id = 'login_screen';
+
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -93,15 +94,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 await prefs.setString("password", passController.text.trim());
                 var userType = prefs.getString("userType");
                 if (await userType == 'Student') {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const StudentScreen()));
+                  Navigator.pushReplacementNamed(context, StudentScreen.id,
+                      arguments: "");
                 } else if (await userType == 'Teacher') {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const TeacherScreen()));
+                  Navigator.pushReplacementNamed(context, TeacherScreen.id,
+                      arguments: "");
                 }
               },
               child: Container(
@@ -128,10 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextSpan(
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SignupScreen()));
+                          Navigator.pushNamed(context, SignupScreen.id,
+                              arguments: "");
                         },
                       text: 'Register',
                       style: const TextStyle(color: Colors.deepPurple))
