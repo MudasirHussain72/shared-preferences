@@ -154,10 +154,10 @@ class _SignupScreenState extends State<SignupScreen> {
                 await prefs.setString("userType", dropdownValue);
                 await prefs.setBool("isLogin", true);
                 var userType = prefs.getString("userType");
-                if (await userType == 'Student') {
+                if (userType == 'Student') {
                   Navigator.pushReplacementNamed(context, StudentScreen.id,
                       arguments: "");
-                } else if (await userType == 'Teacher') {
+                } else if (userType == 'Teacher') {
                   Navigator.pushReplacementNamed(context, TeacherScreen.id,
                       arguments: "");
                 }

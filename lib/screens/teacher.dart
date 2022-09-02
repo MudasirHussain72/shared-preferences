@@ -47,7 +47,7 @@ class _TeacherScreenState extends State<TeacherScreen> {
               await prefs.clear();
               Navigator.pushNamed(context, LoginScreen.id, arguments: "");
             },
-            child: Icon(
+            child: const Icon(
               Icons.logout_outlined,
               size: 30,
               color: Colors.white,
@@ -55,7 +55,6 @@ class _TeacherScreenState extends State<TeacherScreen> {
           )
         ],
       ),
-      // body: Center(child: Text(userEmail.toString())),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -64,15 +63,15 @@ class _TeacherScreenState extends State<TeacherScreen> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text("UserName"), Text(userName.toString())],
+              children: [const Text("UserName"), Text(userName.toString())],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text("UserEmail"), Text(userEmail.toString())],
+              children: [const Text("UserEmail"), Text(userEmail.toString())],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text("UserType"), Text(userType.toString())],
+              children: [const Text("UserType"), Text(userType.toString())],
             ),
           ],
         ),

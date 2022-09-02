@@ -93,10 +93,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 await prefs.setString("email", emailController.text.trim());
                 await prefs.setString("password", passController.text.trim());
                 var userType = prefs.getString("userType");
-                if (await userType == 'Student') {
+                if (userType == 'Student') {
                   Navigator.pushReplacementNamed(context, StudentScreen.id,
                       arguments: "");
-                } else if (await userType == 'Teacher') {
+                } else if (userType == 'Teacher') {
                   Navigator.pushReplacementNamed(context, TeacherScreen.id,
                       arguments: "");
                 }
